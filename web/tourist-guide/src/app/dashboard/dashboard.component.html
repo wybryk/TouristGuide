@@ -1,0 +1,12 @@
+<div class="dashboard categories-div">
+  <mat-grid-list cols="3" rowHeight="100px">
+    <mat-grid-tile *ngFor="let category of categories">
+      <div class="category-list-item hover-element" (click)="gotoPlaces(category.categoryId)">
+        <a mat-list-item *ngIf="category.image">
+          <img matListAvatar src="assets/images/{{category.image}}" *ngIf="category.image" alt={{category.name}}>
+        </a>
+        <a mat-list-item *ngIf="!category.image">{{category.name}}</a>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

@@ -1,0 +1,51 @@
+.name-field {
+  width: 95%;
+}
+
+.category-field {
+  width: 100%;
+}
+
+.categories-list {
+  width: 90%;
+  min-height: 70px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.categories-list-div {
+  width: 100%;
+}
+.category-list-item {
+  float: left;
+}
+
+.category-img {
+  margin-right: 50px;
+}
+
+.category-img img {
+  width: 100px;
+  height: 90%;
+}
+
+.category-name {
+  margin: 10px 0;
+}
+
+.category-name h6 {
+  margin: 0;
+  padding: 0;
+  float: left;
+}
+
+.category-events {
+  float: right;
+}
+
+.category-event {
+  float: left;
+  padding: 5px 10px;
+  margin-top: 10px;
+}

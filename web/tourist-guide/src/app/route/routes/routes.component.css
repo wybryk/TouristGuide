@@ -1,0 +1,94 @@
+#main #search-box .search-form{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.search-field {
+  float: left;
+  margin-right: 20px;
+}
+
+.search-name-div {
+  width: 85%;
+}
+
+.search-category-div {
+  width: 30%;
+}
+
+.search-button-div,
+.reset-search-button-div {
+  width: 5%;
+  float: right;
+  margin-top: 20px
+}
+
+.name-field {
+  width: 95%;
+}
+
+.category-field {
+  width: 100%;
+}
+
+button {
+  background-color: #7986CB;
+  padding: 5px 20px;
+  color: #212121;
+  font-size: 16px;
+}
+
+.routes-list {
+  width: 90%;
+  min-height: 70px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.routes-list-div {
+  width: 100%;
+}
+.route-list-item {
+  float: left;
+}
+
+.route-img {
+  margin-right: 50px;
+}
+
+.route-img img {
+  width: 100px;
+  height: 90%;
+}
+
+.route-category {
+  margin: 5px 0;
+}
+.route-category h6 {
+  margin: 0;
+  padding: 0;
+  float: left;
+}
+
+.route-name {
+  margin: 10px 0;
+}
+
+.route-name h4 {
+  margin: 0;
+  padding: 0;
+  float: left;
+}
+
+.route-events {
+  float: right;
+}
+
+.route-event {
+  float: left;
+  padding: 5px 10px;
+  margin-top: 10px;
+}

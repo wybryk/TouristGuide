@@ -1,0 +1,30 @@
+.add-box {
+    margin: auto;
+    width: 600px;
+    margin-top: 50px;
+}
+
+.add-field {
+    width: 400px;
+}
+
+.name-field, .description-field, .category-field {
+    width: 100%;
+    margin: 5px 0;
+}
+
+.description-field textarea {
+    height: 100px;
+}
+
+.add-img {
+    margin: 10px 0;
+}
+
+.add-coordinates {
+    margin: 20px 0;
+}
+agm-map {
+    height: 300px;
+    width: 100%;
+}

@@ -1,0 +1,39 @@
+<div class="registration-box">
+  <mat-card>
+    <mat-card-title>
+      <mat-toolbar color="primary">
+        <mat-toolbar-row>
+          <span>Edytuj konto</span>
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </mat-card-title>
+    <mat-card-content>
+      <form>
+        <mat-form-field style="width: 100%">
+          <input matInput [(ngModel)]="user.name" name="name" placeholder="Imię" type="text">
+        </mat-form-field>
+        <mat-form-field style="width: 100%">
+          <input matInput [(ngModel)]="user.email" name="email" placeholder="Email" type="email">
+        </mat-form-field>
+        <mat-form-field style="width: 100%">
+          <input matInput [(ngModel)]="user.account.login" name="login" placeholder="Login" type="text">
+        </mat-form-field>
+        <div class="button-row avatar-upload">
+          <button mat-button color="white" mat-mini-fab (click)="imgFileInput.click()">
+            <i class="fa fa-upload" aria-hidden="true"></i>
+          </button>
+          <input hidden type="file" #imgFileInput (change)="readImage($event)"/></div>
+        <mat-form-field style="width: 100%">
+          <input matInput [(ngModel)]="user.account.password" name="password" placeholder="Hasło" type="password">
+        </mat-form-field>
+        <mat-form-field style="width: 100%">
+          <input matInput [(ngModel)]="password" name="reapeatPassword" placeholder="Powtórz hasło" type="password">
+        </mat-form-field>
+        <button mat-raised-button (click)="editUserAccount()">Edytuj</button>
+        <button mat-raised-button (click)="deleteAccount()">Usuń</button>
+      </form>
+      <br>
+      <div *ngIf="errors" label="Error!" sublabel="Wrong login / password." color="warn" icon="error"></div>
+    </mat-card-content>
+  </mat-card>
+</div>

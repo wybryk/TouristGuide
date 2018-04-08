@@ -1,0 +1,24 @@
+<div class="login-box">
+  <mat-card>
+    <mat-card-title>
+      <mat-toolbar color="primary">
+        <mat-toolbar-row>
+          <span>Zaloguj się</span>
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </mat-card-title>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()">
+        <mat-form-field style="width: 100%">
+          <input matInput [(ngModel)]="user.login" name="login" placeholder="Login" type="text">
+        </mat-form-field>
+        <mat-form-field style="width: 100%">
+          <input matInput [(ngModel)]="user.password" name="password" placeholder="Hasło" type="password">
+        </mat-form-field>
+        <button mat-raised-button type="submit">Zaloguj się</button>
+      </form>
+      <br>
+      <div *ngIf="errors" label="Error!" sublabel="Wrong login / password." color="warn" icon="error"></div>
+    </mat-card-content>
+  </mat-card>
+</div>

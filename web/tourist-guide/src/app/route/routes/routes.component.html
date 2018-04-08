@@ -1,0 +1,43 @@
+<div class="search-box">
+  <div class="search-form">
+    <div class="search-field search-name-div">
+      <mat-form-field class="name-field">
+        <input matInput placeholder="Nazwa" [(ngModel)]="routeName">
+      </mat-form-field>
+    </div>
+    <div class="search-field reset-search-button-div">
+      <i class="fa fa-times fa-lg hover-element" aria-hidden="true" (click)="getAllRoutes()"></i>
+    </div>
+    <div class="search-field search-button-div">
+      <!--<button mat-button (click)="searchPlaces()">Szukaj</button>-->
+      <i class="fa fa-search fa-lg hover-element" aria-hidden="true" (click)="searchRoutes()"></i>
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+</div>
+<div class="results">
+  <mat-list>
+    <mat-list-item *ngFor="let route of routes" class="routes-list">
+      <div class="routes-list-div">
+        <div class="route-list-item route-content">
+          <div class="route-name">
+            <h4 matLine>{{route.name}}</h4>
+          </div>
+        </div>
+        <div class="route-events">
+          <div class="route-detail route-event">
+            <i class="fa fa-info fa-lg hover-element" aria-hidden="true" (click)="gotoDetail(route.routeId)"></i>
+            <!--<button mat-button (click)="gotoDetail(route.routeId)">Szczegóły</button>
+            <button mat-button (click)="deleteroute(route.routeId)">Usuń</button>-->
+          </div>
+          <div class="route-edit route-event" *ngIf="authService.isUserLoggedIn">
+            <i class="fa fa-pencil fa-lg hover-element" aria-hidden="true" (click)="gotoEdit(route.routeId)"></i>
+          </div>
+          <div class="route-delete route-event" *ngIf="authService.isUserLoggedIn">
+            <i class="fa fa-trash-o fa-lg hover-element" aria-hidden="true" (click)="deleteRoute(route.routeId)"></i>
+          </div>
+        </div>
+      </div>
+    </mat-list-item>
+  </mat-list>
+</div>

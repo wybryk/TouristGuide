@@ -1,0 +1,25 @@
+<div class="user-detail-div">
+  <mat-card class="user-detail">
+    <mat-card-header>
+      <mat-card-title>{{user.name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="content-div">
+        <div class="content-media content-image">
+          <img mat-card-image *ngIf=user.avatar src="assets/images/{{user.avatar}}" alt={{user.avatar}}>
+        </div>
+        <div style="clear: both;"></div>
+      </div>
+      <div class="content-div content-email">
+        <p>Email: {{user.email}}</p>
+      </div>
+      <div class="content-div content-login">
+        <p>Login: {{user.account.login}}</p>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="gotoUserEdit()">Edytuj</button>
+      <button mat-button (click)="goBack()">Wróć</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

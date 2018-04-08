@@ -1,0 +1,24 @@
+  <div class="results">
+    <mat-list>
+      <mat-list-item *ngFor="let category of categories" class="categories-list">
+        <div class="categories-list-div">
+          <div class="category-list-item category-img">
+            <img matListAvatar src="assets/images/{{category.image}}" *ngIf="category.image" alt={{category.name}}>
+          </div>
+          <div class="category-list-item category-content">
+            <div class="category-name">
+              <h6 matLine>{{category.name}}</h6>
+            </div>
+          </div>
+          <div class="category-events">
+            <div class="category-edit category-event" *ngIf="authService.isUserLoggedIn">
+              <i class="fa fa-pencil fa-lg hover-element" aria-hidden="true" (click)="gotoEdit(category.categoryId)"></i>
+            </div>
+            <div class="category-delete category-event" *ngIf="authService.isUserLoggedIn">
+              <i class="fa fa-trash-o fa-lg hover-element" aria-hidden="true" (click)="deleteCategory(category.categoryId)"></i>
+            </div>
+          </div>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>

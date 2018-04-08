@@ -1,0 +1,59 @@
+<div class="search-box">
+  <div class="search-form">
+    <div class="search-field search-name-div">
+      <mat-form-field class="name-field">
+        <input matInput placeholder="Nazwa" [(ngModel)]="searchedPlace.name">
+      </mat-form-field>
+    </div>
+    <div class="search-field search-category-div">
+      <mat-form-field class="category-field">
+        <mat-select placeholder="Kategoria" [(ngModel)]="searchedPlace.category" name="category">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{category.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="search-field reset-search-button-div">
+      <i class="fa fa-times fa-lg hover-element" aria-hidden="true" (click)="getAllPlaces()"></i>
+    </div>
+    <div class="search-field search-button-div">
+      <!--<button mat-button (click)="searchPlaces()">Szukaj</button>-->
+      <i class="fa fa-search fa-lg hover-element" aria-hidden="true" (click)="searchPlaces()"></i>
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+</div>
+<div class="results">
+  <mat-list>
+    <mat-list-item *ngFor="let place of places" class="places-list">
+      <div class="places-list-div">
+        <div class="place-list-item place-img">
+          <img matListAvatar src="assets/images/{{place.image}}" *ngIf="place.image" alt={{place.name}}>
+        </div>
+        <div class="place-list-item place-content">
+          <div class="place-category">
+            <h6 matLine>{{place.category.name}}</h6>
+          </div>
+          <div class="place-name">
+            <h4 matLine>{{place.name}}</h4>
+          </div>
+        </div>
+        <div class="place-events">
+          <div class="place-detail place-event">
+            <i class="fa fa-info fa-lg hover-element" aria-hidden="true" (click)="gotoDetail(place.placeId)"></i>
+            <!--<button mat-button (click)="gotoDetail(place.placeId)">Szczegóły</button>
+            <button mat-button (click)="deletePlace(place.placeId)">Usuń</button>-->
+          </div>
+          <div class="place-edit place-event" *ngIf="authService.isUserLoggedIn">
+            <i class="fa fa-pencil fa-lg hover-element" aria-hidden="true" (click)="gotoEdit(place.placeId)"></i>
+          </div>
+          <div class="place-delete place-event" *ngIf="authService.isUserLoggedIn">
+            <i class="fa fa-trash-o fa-lg hover-element" aria-hidden="true" (click)="deletePlace(place.placeId)"></i>
+          </div>
+        </div>
+      </div>
+    </mat-list-item>
+  </mat-list>
+</div>

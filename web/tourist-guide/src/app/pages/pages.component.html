@@ -1,0 +1,37 @@
+<div class="top hide-sm">
+  <div class="top-brand">
+    <a [routerLink]="['/dashboard']">Kielce Guide</a>
+  </div>
+  <nav class="top-nav-main">
+    <mat-nav-list>
+      <a mat-list-item *ngIf="authService.isUserLoggedIn" [routerLink]="['/place/add']" class="nav-list-item">Dodaj
+        miejsce</a>
+      <a mat-list-item *ngIf="authService.isUserLoggedIn" [routerLink]="['/category/add']" class="nav-list-item">Dodaj
+        kategorię</a>
+      <a mat-list-item  [routerLink]="['/route/add']" class="nav-list-item">Dodaj
+        trasę</a>
+      <a mat-list-item *ngIf="authService.isUserLoggedIn" [routerLink]="['/categories']"
+         class="nav-list-item">Kategorie</a>
+      <a mat-list-item [routerLink]="['/places']" class="nav-list-item">Wyświetl</a>
+    </mat-nav-list>
+  </nav>
+  <nav class="top-nav-extra">
+    <mat-nav-list>
+      <a mat-list-item *ngIf="!authService.isUserLoggedIn" [routerLink]="['/register']" class="nav-list-item">Rejestracja</a>
+      <a mat-list-item *ngIf="!authService.isUserLoggedIn" [routerLink]="['/login']" class="nav-list-item">Zaloguj</a>
+      <!--<a mat-list-item *ngIf="authService.isUserLoggedIn" (click)="logout()" class="nav-list-item">Wyloguj</a>-->
+      <a *ngIf="authService.isUserLoggedIn" [matMenuTriggerFor]="appMenu" class="user-events hover-element">
+        <i *ngIf="!user.avatar" class="fa fa-user-circle-o fa-2x nav-list-item user-avatar" aria-hidden="true"></i>
+        <img matListAvatar *ngIf="user.avatar" class="user-avatar" src="assets/images/{{user.avatar}}"
+             alt={{user.name}}>
+        <span class="user-name">{{user.name}}</span>
+      </a>
+      <mat-menu #appMenu="matMenu">
+        <button mat-menu-item [routerLink]="['/user/edit']">Edytuj</button>
+        <button mat-menu-item [routerLink]="['/user/detail']">Szczegóły</button>
+        <button mat-menu-item [routerLink]="['/routes']">Moje trasy</button>
+        <button mat-menu-item (click)="logout()">Wyloguj</button>
+      </mat-menu>
+    </mat-nav-list>
+  </nav>
+</div>

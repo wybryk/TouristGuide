@@ -1,0 +1,14 @@
+<div class="add-box">
+  <div class="add-field add-name">
+    <mat-form-field class="name-field">
+      <input matInput placeholder="Nazwa" [(ngModel)]="category.name" required>
+    </mat-form-field>
+  </div>
+  <div class="add-field add-img">
+    <input type="file" (change)="readImage($event)">
+  </div>
+  <div>
+    <button mat-button [disabled]="!category.name || !category.image" (click)="addCategory()">Dodaj</button>
+    <button mat-button (click)="clear()">Wyczyść</button>
+  </div>
+</div>
