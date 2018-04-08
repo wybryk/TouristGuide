@@ -13,8 +13,8 @@ export class RouteService {
     return this.http.post<any>(this.routeUrl, route);
   }
 
-  getRoutes(userId: number): Observable<Route[]> {
-    return this.http.get<any>(this.routeUrl + '/user' + userId);
+  getRoutes(accountId: number): Observable<Route[]> {
+    return this.http.get<any>(this.routeUrl + '/user/' + accountId);
   }
 
   getRoute(routeId: number): Observable<Route> {

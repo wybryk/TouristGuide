@@ -50,7 +50,14 @@ public class UserMapper {
         account.setLogin(accountDTO.getLogin());
         account.setPassword(accountDTO.getPassword());
         account.setUserDetail(userDetail);
-        System.out.println(account);
+        return account;
+    }
+
+    public static Account toAccount(AccountDTO accountDTO) {
+        Account account = new Account();
+        account.setAccountId(accountDTO.getAccountId());
+        account.setLogin(accountDTO.getLogin());
+        account.setPassword(accountDTO.getPassword());
         return account;
     }
 }

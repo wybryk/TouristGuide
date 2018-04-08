@@ -54,6 +54,15 @@ public class UserService {
         return account.get();
     }
 
+    public Account findAccountById(Long accountId) throws Exception {
+        Optional<Account> account = accountDao.findById(accountId);
+        if (account.get() == null) {
+            throw new Exception(Account.class.getSimpleName());
+        }
+
+        return account.get();
+    }
+
     public void updateUserAccount(Long userDetailId, UserDetailDTO userDetailDTO) {
 
     }

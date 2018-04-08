@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthorizationService} from '../../authorization/authorization.service';
 import {Route} from '../../common/model/route';
 import {Router} from '@angular/router';
+import {RouteService} from '../route.service';
+import {StoreService} from '../../common/store.service';
+import {UserAccount} from '../../common/model/user-account';
 
 @Component({
   selector: 'app-routes',
@@ -11,14 +14,25 @@ import {Router} from '@angular/router';
 export class RoutesComponent implements OnInit {
   routes: Route[];
   routeName: string;
-  constructor(public authService: AuthorizationService,
-              private router: Router) { }
+  account: UserAccount;
+
+  constructor(private routeService: RouteService,
+              private store: StoreService,
+              public authService: AuthorizationService,
+              private router: Router) {
+  }
 
   ngOnInit() {
+    this.account = this.store.currentAccount.account;
+    this.getAllRoutes();
   }
 
   getAllRoutes() {
-
+    this.routeService.getRoutes(this.account.accountId).subscribe(
+      result => {
+        this.routes = result;
+      }
+    );
   }
 
   searchRoutes() {
@@ -34,6 +48,10 @@ export class RoutesComponent implements OnInit {
   }
 
   deleteRoute(routeId: number) {
-
+    this.routeService.deleteRoute(routeId).subscribe(() => {
+      this.routes.filter(value => {
+        value.routeId !== routeId;
+      });
+    });
   }
 }

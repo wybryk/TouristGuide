@@ -2,8 +2,7 @@ package pl.touristguide.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "ROUTE")
@@ -23,11 +22,14 @@ public class Route {
     @JoinColumn(name = "ACCOUNT_ID")
     private Account account;
 
-    @OneToMany(mappedBy = "route", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<RoutePlace> routePlaces;
+    /*OneToMany(mappedBy = "route", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Queue<RoutePlace> routePlaces;*/
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "ROUTE_PLACE", joinColumns = {@JoinColumn(name = "ROUTE_ID")}, inverseJoinColumns = {@JoinColumn(name = "PLACE_ID")})
+    private List<Place> places;
 
     public Route() {
-        this.routePlaces = new ArrayList<>();
     }
 
     public Long getRouteId() {
@@ -62,11 +64,30 @@ public class Route {
         this.account = account;
     }
 
-    public List<RoutePlace> getRoutePlaces() {
+    /*public Queue<RoutePlace> getRoutePlaces() {
         return routePlaces;
     }
 
-    public void setRoutePlaces(List<RoutePlace> routePlaces) {
+    public void setRoutePlaces(Queue<RoutePlace> routePlaces) {
         this.routePlaces = routePlaces;
+    }*/
+
+    public List<Place> getPlaces() {
+        return places;
+    }
+
+    public void setPlaces(List<Place> places) {
+        this.places = places;
+    }
+
+    @Override
+    public String toString() {
+        return "Route{" +
+                "routeId=" + routeId +
+                ", name='" + name + '\'' +
+                ", routeLength=" + routeLength +
+                ", account=" + account +
+                ", places=" + places +
+                '}';
     }
 }

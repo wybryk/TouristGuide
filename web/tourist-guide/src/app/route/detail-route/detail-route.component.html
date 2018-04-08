@@ -1,3 +1,49 @@
-<p>
-  detail-route works!
-</p>
+<div class="info-box">
+  <div class="info-field info-name">
+    <mat-form-field class="name-field">
+      <input matInput placeholder="Nazwa" [(ngModel)]="route.name" required>
+    </mat-form-field>
+  </div>
+  <div class="info-field info-coordinates">
+    <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]=13>
+      <!--<agm-marker *ngFor="let place of route.places"
+                  [latitude]="place.lat" [longitude]="place.lng">
+      </agm-marker>
+      <agm-polyline [strokeColor]="'#2196f3'">
+          <agm-polyline-point *ngFor="let place of route.places" [latitude]="place.latitude" [longitude]="place.longitude"></agm-polyline-point>
+      </agm-polyline>-->
+      <agm-direction *ngFor="let place of route.places; let i = index" [origin]="route.places[i]"
+                     [destination]="route.places[i+1]"></agm-direction>
+      <agm-info-window>
+        <strong>InfoWindow content</strong>
+      </agm-info-window>
+    </agm-map>
+  </div>
+  <div class="info-field info-places">
+    <mat-list class="places-list list-group">
+      <mat-list-item *ngFor="let place of route.places" class="list-group-item">
+        <div class="places-list-div">
+          <div class="place-list-item place-img">
+            <img matListAvatar src="assets/images/{{place.image}}" *ngIf="place.image" alt={{place.name}}>
+          </div>
+          <div class="place-list-item place-content">
+            <div class="place-category">
+              <h6 matLine>{{place.category.name}}</h6>
+            </div>
+            <div class="place-name">
+              <h4 matLine>{{place.name}}</h4>
+            </div>
+          </div>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div style="clear: both;"></div>
+  <div>
+    <button mat-button [disabled]="!route.name" (click)="gotoEdit()">Edytuj</button>
+    <button mat-button (click)="goBack()">Wróć</button>
+  </div>
+</div>
+
+
+

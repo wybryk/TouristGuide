@@ -27,8 +27,6 @@
         <div class="route-events">
           <div class="route-detail route-event">
             <i class="fa fa-info fa-lg hover-element" aria-hidden="true" (click)="gotoDetail(route.routeId)"></i>
-            <!--<button mat-button (click)="gotoDetail(route.routeId)">Szczegóły</button>
-            <button mat-button (click)="deleteroute(route.routeId)">Usuń</button>-->
           </div>
           <div class="route-edit route-event" *ngIf="authService.isUserLoggedIn">
             <i class="fa fa-pencil fa-lg hover-element" aria-hidden="true" (click)="gotoEdit(route.routeId)"></i>

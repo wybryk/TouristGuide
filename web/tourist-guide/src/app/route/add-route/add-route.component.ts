@@ -3,6 +3,7 @@ import {Route} from '../../common/model/route';
 import {Place} from '../../common/model/place';
 import {PlaceService} from '../../place/place.service';
 import {RouteService} from '../route.service';
+import {StoreService} from '../../common/store.service';
 
 @Component({
   selector: 'app-add-route',
@@ -12,18 +13,19 @@ import {RouteService} from '../route.service';
 export class AddRouteComponent implements OnInit {
   route: Route;
   places: Place[];
-  simpleDrop: any = null;
   latitude = 50.866025381805336;
   longitude = 20.628521202597767;
 
   constructor(private routeService: RouteService,
-              private  placeService: PlaceService) {
+              private  placeService: PlaceService,
+              private store: StoreService) {
   }
 
   ngOnInit() {
     this.route = new Route();
     this.route.places = new Array();
     this.getPlaces();
+    this.route.account = this.store.currentAccount.account;
   }
 
   getPlaces() {

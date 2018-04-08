@@ -22,22 +22,24 @@ public class Place {
     @Column(name = "IMAGE", nullable = false)
     private String imageName;
 
-    @Column(name = "LATITUDE", precision = 16, nullable = false)
+    @Column(name = "LATITUDE", precision = 16, scale = 13, nullable = false)
     private BigDecimal latitude;
 
-    @Column(name = "LONGITUDE", precision = 16, nullable = false)
+    @Column(name = "LONGITUDE", precision = 16, scale = 13, nullable = false)
     private BigDecimal longitude;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "CATEGORY_ID", referencedColumnName="CATEGORY_ID")
     private Category category;
 
-    @OneToMany(mappedBy = "place", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<RoutePlace> routePlaces;
+    /*@OneToMany(mappedBy = "place", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<RoutePlace> routePlaces;*/
+
+    @ManyToMany(mappedBy = "places")
+    private List<Route> routes;
 
 
     public Place() {
-        this.routePlaces = new ArrayList<>();
     }
 
     public Long getPlaceId() {
@@ -96,12 +98,12 @@ public class Place {
         this.category = category;
     }
 
-    public List<RoutePlace> getRoutePlaces() {
-        return routePlaces;
+    public List<Route> getRoutes() {
+        return routes;
     }
 
-    public void setRoutePlaces(List<RoutePlace> routePlaces) {
-        this.routePlaces = routePlaces;
+    public void setRoutes(List<Route> routes) {
+        this.routes = routes;
     }
 
     @Override
@@ -114,7 +116,6 @@ public class Place {
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 ", category=" + category +
-                ", routePlaces=" + routePlaces +
                 '}';
     }
 }

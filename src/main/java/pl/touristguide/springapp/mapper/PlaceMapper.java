@@ -3,7 +3,19 @@ package pl.touristguide.springapp.mapper;
 import pl.touristguide.model.Place;
 import pl.touristguide.springapp.dto.PlaceDTO;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.stream.Collectors;
+
 public class PlaceMapper {
+
+    public static List<Place> toPlaceList(Queue<PlaceDTO> placeDTOQueue){
+        return placeDTOQueue.stream()
+                .map(tmpPlace -> toPlace(tmpPlace))
+                .collect(Collectors.toList());
+    }
+
     public static Place toPlace(PlaceDTO placeDTO) {
         Place place = new Place();
         place.setPlaceId(placeDTO.getPlaceId());
@@ -13,6 +25,13 @@ public class PlaceMapper {
         place.setLongitude(placeDTO.getLng());
         place.setCategory(CategoryMapper.toCategory(placeDTO.getCategory()));
         return place;
+    }
+
+    public static Queue<PlaceDTO> toPlaceDTOQueue(List<Place> places) {
+        Queue<PlaceDTO> placeDTOS = new LinkedList<>();
+        for(Place tmpPlace : places)
+            placeDTOS.offer(toPlaceDTO(tmpPlace));
+        return placeDTOS;
     }
 
     public static PlaceDTO toPlaceDTO(Place place) {

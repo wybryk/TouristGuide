@@ -25,8 +25,8 @@ export class AddPlaceComponent implements OnInit {
 
   ngOnInit() {
     this.categoryService.getCategories().subscribe(val => this.categories = val);
-    this.place.latitude = 50.866025381805336;
-    this.place.longitude = 20.628521202597767;
+    this.place.lat = 50.866025381805336;
+    this.place.lng = 20.628521202597767;
   }
 
   addPlace() {
@@ -50,8 +50,8 @@ export class AddPlaceComponent implements OnInit {
   }
 
   onChoseLocation(event) {
-    this.place.latitude = event.coords.lat;
-    this.place.longitude = event.coords.lng;
+    this.place.lat = event.coords.lat;
+    this.place.lng = event.coords.lng;
     this.locationChosen = true;
     console.log(event);
   }

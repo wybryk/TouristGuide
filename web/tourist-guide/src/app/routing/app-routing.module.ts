@@ -17,6 +17,7 @@ import {CategoriesComponent} from '../category/categories/categories.component';
 import {AddRouteComponent} from '../route/add-route/add-route.component';
 import {EditRouteComponent} from '../route/edit-route/edit-route.component';
 import {RoutesComponent} from '../route/routes/routes.component';
+import {DetailRouteComponent} from '../route/detail-route/detail-route.component';
 
 
 const routes: Routes = [
@@ -78,11 +79,11 @@ const routes: Routes = [
     component: AddRouteComponent
   },
   {
-    path: 'route/detail:id',
-    component: DetailPlaceComponent
+    path: 'route/detail/:id',
+    component: DetailRouteComponent
   },
   {
-    path: 'route/edit:id',
+    path: 'route/edit/:id',
     component: EditRouteComponent
   },
   {

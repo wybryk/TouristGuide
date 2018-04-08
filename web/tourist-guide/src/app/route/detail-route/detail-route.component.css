@@ -1,0 +1,77 @@
+.info-box {
+  margin: auto;
+  width: 60%;
+  margin-top: 50px;
+}
+
+.info-field {
+  width: 400px;
+}
+
+.name-field {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.info-coordinates {
+  margin: 20px 0;
+  width: 100%;
+}
+
+agm-map {
+  height: 300px;
+  width: 100%;
+}
+
+.places-list {
+  width: 90%;
+  min-height: 70px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.places-list-div {
+  width: 100%;
+}
+.place-list-item {
+  float: left;
+}
+
+.place-img {
+  margin-right: 50px;
+}
+
+.place-img img {
+  width: 100px;
+  height: 90%;
+}
+
+.place-category {
+  margin: 5px 0;
+}
+.place-category h6 {
+  margin: 0;
+  pinfoing: 0;
+  float: left;
+}
+
+.place-name {
+  margin: 10px 0;
+}
+
+.place-name h4 {
+  margin: 0;
+  pinfoing: 0;
+  float: left;
+}
+
+.info-places {
+  width: 100%;
+}
+
+.places-col {
+  width: 50%;
+  float: left;
+}
