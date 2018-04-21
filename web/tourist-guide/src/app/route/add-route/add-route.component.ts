@@ -48,12 +48,10 @@ export class AddRouteComponent implements OnInit {
   gotoPlaceDetail(place: Place) {
     let placeDialogRef = this.dialog.open(DetailPlaceDialog, {
       width: '1000px',
-      height: '500px',
-      data: {place: place}
-    });
-
-    placeDialogRef.afterClosed().subscribe(result => {
-      console.log("close");
+      data: {
+        placeId: place.placeId,
+        canEdit: false
+      }
     });
   }
 

@@ -17,6 +17,7 @@ import {Category} from '../../common/model/category';
 
 export class DetailPlaceComponent implements OnInit {
   place = new Place();
+  canEdit: boolean = true;
 
   constructor(private router: Router,
               private route: ActivatedRoute,

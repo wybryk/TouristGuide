@@ -21,7 +21,7 @@
             </div>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-button (click)="gotoPlaceEdit(place.placeId)">Edytuj</button>
+            <button mat-button *ngIf="canEdit" (click)="gotoPlaceEdit(place.placeId)">Edytuj</button>
             <button mat-button (click)="goBack()">Wróć</button>
         </mat-card-actions>
     </mat-card>
