@@ -4,6 +4,9 @@ import {Place} from '../../common/model/place';
 import {PlaceService} from '../../place/place.service';
 import {RouteService} from '../route.service';
 import {StoreService} from '../../common/store.service';
+import {DetailPlaceDialog} from '../../place/detail-place/detail-place.dialog';
+import {MatDialog} from '@angular/material/dialog';
+import {AuthorizationService} from '../../authorization/authorization.service';
 
 @Component({
   selector: 'app-add-route',
@@ -18,7 +21,9 @@ export class AddRouteComponent implements OnInit {
 
   constructor(private routeService: RouteService,
               private  placeService: PlaceService,
-              private store: StoreService) {
+              private store: StoreService,
+              public authService: AuthorizationService,
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -40,6 +45,18 @@ export class AddRouteComponent implements OnInit {
     this.routeService.addRoute(this.route).subscribe(() => {});
   }
 
+  gotoPlaceDetail(place: Place) {
+    let placeDialogRef = this.dialog.open(DetailPlaceDialog, {
+      width: '1000px',
+      height: '500px',
+      data: {place: place}
+    });
+
+    placeDialogRef.afterClosed().subscribe(result => {
+      console.log("close");
+    });
+  }
+
   onChoseLocation(event) {
     /*this.place.latitude = event.coords.lat;
     this.place.longitude = event.coords.lng;
@@ -48,6 +65,7 @@ export class AddRouteComponent implements OnInit {
   }
 
   clear() {
+    this.getPlaces();
     this.route.name = null;
     this.route.places = new Array();
   }

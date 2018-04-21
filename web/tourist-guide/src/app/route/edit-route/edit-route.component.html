@@ -1,10 +1,10 @@
-<div class="edit-box">
-  <div class="edit-field edit-name">
+<div class="add-box">
+  <div class="add-field add-name">
     <mat-form-field class="name-field">
       <input matInput placeholder="Nazwa" [(ngModel)]="route.name" required>
     </mat-form-field>
   </div>
-  <div class="edit-field edit-coordinates">
+  <div class="add-field add-coordinates">
     <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]=13>
       <!--<agm-marker *ngFor="let place of route.places"
                   [latitude]="place.lat" [longitude]="place.lng">
@@ -13,39 +13,33 @@
           <agm-polyline-point *ngFor="let place of route.places" [latitude]="place.latitude" [longitude]="place.longitude"></agm-polyline-point>
       </agm-polyline>-->
       <agm-direction *ngFor="let place of route.places; let i = index" [origin]="route.places[i]"
-                     [destination]="route.places[i+1]"></agm-direction>
-      <!--<agm-edit-window>
-        <strong>editWindow content</strong>
-      </agm-edit-window>-->
+                     [destination]="route.places[i+1]">
+      </agm-direction>
+      <agm-info-window>
+        <strong>InfoWindow content</strong>
+      </agm-info-window>
     </agm-map>
   </div>
-  <div class="edit-field edit-places">
-    <mat-list class="places-list list-group">
-      <mat-list-item *ngFor="let place of route.places" class="list-group-item">
-        <div class="places-list-div">
-          <div class="place-list-item place-img">
-            <img matListAvatar src="assets/images/{{place.image}}" *ngIf="place.image" alt={{place.name}}>
-          </div>
-          <div class="place-list-item place-content">
-            <div class="place-category">
-              <h6 matLine>{{place.category.name}}</h6>
-            </div>
-            <div class="place-name">
-              <h4 matLine>{{place.name}}</h4>
-            </div>
+  <div class="add-field add-places">
+    <p-pickList [source]="filterPlaces" [target]="route.places" sourceHeader="Dostępne miejsca" targetHeader="Wybrane miejsca"
+                [responsive]="true" filterBy="name" dragdrop="true" dragdropScope="filterPlaces"
+                sourceFilterPlaceholder="Nazwa" targetFilterPlaceholder="Nazwa"
+                [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}">
+      <ng-template let-place pTemplate="item">
+        <div class="ui-helper-clearfix">
+          <img src="assets/images/{{place.image}}" style="display:inline-block;margin:2px 0 2px 2px" width="48">
+          <div style="font-size:14px;float:right;margin:15px 5px 0 0">
+            <span>{{place.name}} - {{place.category.name}}</span>
+            <i class="fa fa-info fa-lg hover-element" aria-hidden="true" (click)="gotoPlaceDetail(place)"></i>
           </div>
         </div>
-      </mat-list-item>
-    </mat-list>
+      </ng-template>
+    </p-pickList>
   </div>
-  <div style="clear: both;"></div>
   <div>
     <button mat-button [disabled]="!route.name"
-            (click)="editRoute()">Edytuj
+            (click)="editRoute()">Dodaj
     </button>
-    <button mat-button (click)="goBack()">Wróć</button>
+    <button mat-button (click)="clear()">Wyczyść</button>
   </div>
 </div>
-
-
-

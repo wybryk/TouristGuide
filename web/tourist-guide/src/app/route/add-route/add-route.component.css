@@ -1,29 +1,28 @@
-@import "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css";
-
 .add-box {
-  margin: auto;
-  width: 60%;
-  margin-top: 50px;
+  width: 100%;
 }
 
 .add-field {
-  width: 400px;
-}
-
-.name-field {
-  width: 100%;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 10px;
+}
+
+.add-name {
+  width: 80%;
 }
 
 .add-coordinates {
-  margin: 20px 0;
-  width: 100%;
+  width: 80%;
+  margin-bottom: 20px;
+}
+
+.add-buttons {
+  width: 80%;
 }
 
 agm-map {
   height: 300px;
-  width: 100%;
 }
 
 .places-list {
@@ -76,4 +75,13 @@ agm-map {
 .places-col {
   width: 50%;
   float: left;
+}
+
+.place-events {
+  float: right;
+}
+
+.place-event {
+  float: left;
+  padding: 5px 10px;
 }

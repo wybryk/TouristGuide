@@ -43,8 +43,6 @@
         <div class="place-events">
           <div class="place-detail place-event">
             <i class="fa fa-info fa-lg hover-element" aria-hidden="true" (click)="gotoDetail(place.placeId)"></i>
-            <!--<button mat-button (click)="gotoDetail(place.placeId)">Szczegóły</button>
-            <button mat-button (click)="deletePlace(place.placeId)">Usuń</button>-->
           </div>
           <div class="place-edit place-event" *ngIf="authService.isUserLoggedIn">
             <i class="fa fa-pencil fa-lg hover-element" aria-hidden="true" (click)="gotoEdit(place.placeId)"></i>

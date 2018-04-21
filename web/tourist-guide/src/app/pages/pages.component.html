@@ -6,9 +6,7 @@
     <mat-nav-list>
       <a mat-list-item *ngIf="authService.isUserLoggedIn" [routerLink]="['/place/add']" class="nav-list-item">Dodaj
         miejsce</a>
-      <a mat-list-item *ngIf="authService.isUserLoggedIn" [routerLink]="['/category/add']" class="nav-list-item">Dodaj
-        kategorię</a>
-      <a mat-list-item *ngIf="authService.isUserLoggedIn" [routerLink]="['/route/add']" class="nav-list-item">Dodaj
+      <a mat-list-item [routerLink]="['/route/add']" class="nav-list-item">Wyznacz
         trasę</a>
       <a mat-list-item *ngIf="authService.isUserLoggedIn" [routerLink]="['/categories']"
          class="nav-list-item">Kategorie</a>

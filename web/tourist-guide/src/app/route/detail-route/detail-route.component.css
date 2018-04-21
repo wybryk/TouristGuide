@@ -48,6 +48,11 @@ agm-map {
   height: 90%;
 }
 
+.place-index {
+  padding: 10px;
+  font-size: 18px;
+}
+
 .place-category {
   margin: 5px 0;
 }

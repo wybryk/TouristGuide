@@ -1,22 +1,24 @@
-.add-box {
-    margin: auto;
-    width: 600px;
-    margin-top: 50px;
+.add-box .add-form {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 10px;
 }
 
 .add-field {
-    width: 400px;
+  float: left;
+  margin-right: 20px;
 }
 
-.name-field, .description-field, .category-field {
-    width: 100%;
-    margin: 5px 0;
+.add-name {
+  width: 50%;
 }
 
-.description-field textarea {
-    height: 100px;
+.name-field {
+  width: 95%;
 }
 
 .add-img {
-    margin: 10px 0;
+  width: 30%;
+  margin-top: 20px;
 }

@@ -1,6 +1,6 @@
 <div class="add-box">
   <div class="add-field add-name">
-    <mat-form-field class="name-field">
+    <mat-form-field class="add-field add-name">
       <input matInput placeholder="Nazwa" [(ngModel)]="route.name" required>
     </mat-form-field>
   </div>
@@ -12,113 +12,35 @@
       <agm-polyline [strokeColor]="'#2196f3'">
           <agm-polyline-point *ngFor="let place of route.places" [latitude]="place.latitude" [longitude]="place.longitude"></agm-polyline-point>
       </agm-polyline>-->
-      <agm-direction *ngFor="let place of route.places; let i = index" [origin]="route.places[i]" [destination]="route.places[i+1]"></agm-direction>
+      <agm-direction *ngFor="let place of route.places; let i = index" [origin]="route.places[i]"
+                     [destination]="route.places[i+1]"></agm-direction>
       <agm-info-window>
         <strong>InfoWindow content</strong>
       </agm-info-window>
     </agm-map>
   </div>
   <div class="add-field add-places">
-    <div class="col-sm-3 places-col">
-      <div class="panel panel-warning">
-        <div class="panel-heading">Dostępne miejsca</div>
-        <div class="panel available-panel panel-body" dnd-sortable-container [dropZones]="['boxers-zone']"
-             [sortableData]="places">
-          <ul class="list-group">
-            <li *ngFor="let place of places; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i">
-              <!--<div class="places-list-div">
-                <div class="place-list-item place-img">
-                  <img matListAvatar src="assets/images/{{place.image}}" *ngIf="place.image" alt={{place.name}}>
-                </div>
-                <div class="place-list-item place-content">
-                  <div class="place-category">
-                    <h6 matLine>{{place.category.name}}</h6>
-                  </div>
-                  <div class="place-name">
-                    <h4 matLine>{{place.name}}</h4>
-                  </div>
-                </div>
-              </div>-->
-              {{place.name}}
-            </li>
-          </ul>
-          <!--<mat-list class="places-list list-group">
-            <mat-list-item *ngFor="let place of places" class="list-group-item">
-              <div class="places-list-div">
-                <div class="place-list-item place-img">
-                  <img matListAvatar src="assets/images/{{place.image}}" *ngIf="place.image" alt={{place.name}}>
-                </div>
-                <div class="place-list-item place-content">
-                  <div class="place-category">
-                    <h6 matLine>{{place.category.name}}</h6>
-                  </div>
-                  <div class="place-name">
-                    <h4 matLine>{{place.name}}</h4>
-                  </div>
-                </div>
-              </div>
-            </mat-list-item>
-          </mat-list>-->
+    <p-pickList [source]="places" [target]="route.places" sourceHeader="Dostępne miejsca" targetHeader="Wybrane miejsca"
+                [responsive]="true" filterBy="name" dragdrop="true" dragdropScope="places"
+                sourceFilterPlaceholder="Nazwa" targetFilterPlaceholder="Nazwa"
+                [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}">
+      <ng-template let-place pTemplate="item">
+        <div class="ui-helper-clearfix">
+          <img src="assets/images/{{place.image}}" style="display:inline-block;margin:2px 0 2px 2px" width="48">
+          <div style="font-size:14px;float:right;margin:15px 5px 0 0">
+            <span>{{place.name}} - {{place.category.name}}</span>
+            <i class="fa fa-info fa-lg hover-element" aria-hidden="true" (click)="gotoPlaceDetail(place)"></i>
+          </div>
         </div>
-      </div>
-    </div>
+      </ng-template>
+    </p-pickList>
   </div>
-  <div class="col-sm-3 places-col">
-    <div class="panel result-panel panel-success">
-      <div class="panel-heading">Wybrane miejsca</div>
-      <div class="panel-body" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="route.places">
-        <ul class="list-group">
-          <li *ngFor="let place of route.places; let i = index" class="list-group-item" dnd-sortable
-              [sortableIndex]="i">
-            <!--<div class="places-list-div">
-              <div class="place-list-item place-img">
-                <img matListAvatar src="assets/images/{{place.image}}" *ngIf="place.image" alt={{place.name}}>
-              </div>
-              <div class="place-list-item place-content">
-                <div class="place-category">
-                  <h6 matLine>{{place.category.name}}</h6>
-                </div>
-                <div class="place-name">
-                  <h4 matLine>{{place.name}}</h4>
-                </div>
-              </div>
-            </div>-->
-            {{place.name}}
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div style="clear: both;"></div>
-  <div>
-    <button mat-button [disabled]="!route.name"
+  <div class="add-field add-buttons">
+    <button *ngIf="authService.isUserLoggedIn" mat-button [disabled]="!route.name || route.places.length == 0"
             (click)="addRoute()">Dodaj
     </button>
     <button mat-button (click)="clear()">Wyczyść</button>
   </div>
 </div>
-<!--<h4>Simple Drag-and-Drop operations with no code</h4>
-<div class="row">
-  <div class="col-sm-3">
-    <div class="panel panel-success">
-      <div class="panel-heading">Available to drag</div>
-      <div class="panel-body">
-        <div class="panel panel-default" dnd-draggable [dragEnabled]="true">
-          <div class="panel-body">
-            <div>Drag Me</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-3">
-    <div dnd-droppable class="panel panel-info" (onDropSuccess)="simpleDrop=$event">
-      <div class="panel-heading">Place to drop</div>
-      <div class="panel-body">
-        <div *ngIf="simpleDrop">Item was dropped here</div>
-      </div>
-    </div>
-  </div>
-</div>-->
 
 

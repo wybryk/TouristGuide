@@ -1,4 +1,5 @@
 <div class="add-box">
+  <div class="add-div">
   <div class="add-field add-name">
     <mat-form-field class="name-field">
       <input matInput placeholder="Nazwa" [(ngModel)]="place.name" required>
@@ -23,12 +24,16 @@
   <div class="add-field add-img">
     <input type="file" (change)="readImage($event)">
   </div>
-  <div class="add-field add-coordinates">
-    <agm-map [latitude]="place.lat" [longitude]="place.lng" [zoom]=14 (mapClick)="onChoseLocation($event)">
-      <agm-marker *ngIf="locationChosen" [latitude]="place.lat" [longitude]="place.lng"></agm-marker>
-    </agm-map>
   </div>
-  <div>
+  <div class="add-div">
+    <div class="add-field add-coordinates">
+      <agm-map [latitude]="place.lat" [longitude]="place.lng" [zoom]=14 (mapClick)="onChoseLocation($event)">
+        <agm-marker *ngIf="locationChosen" [latitude]="place.lat" [longitude]="place.lng"></agm-marker>
+      </agm-map>
+    </div>
+  </div>
+  <div style="clear: both"></div>
+  <div class="add-field add-buttons">
     <button mat-button [disabled]="!place.category  || !place.name || !place.description || !locationChosen"
             (click)="addPlace()">Dodaj
     </button>

@@ -1,13 +1,13 @@
-#main #search-box .search-form{
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-  }
+#main #search-box .search-form {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
 
 .search-field {
-    float: left;
-    margin-right: 20px;
+  float: left;
+  margin-right: 20px;
 }
 
 .search-name-div {
@@ -51,6 +51,7 @@ button {
 .places-list-div {
   width: 100%;
 }
+
 .place-list-item {
   float: left;
 }
@@ -67,6 +68,7 @@ button {
 .place-category {
   margin: 5px 0;
 }
+
 .place-category h6 {
   margin: 0;
   padding: 0;
