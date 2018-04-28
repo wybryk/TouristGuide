@@ -7,7 +7,7 @@ import {Place} from '../../common/model/place';
 import {StoreService} from '../../common/store.service';
 import {PlaceService} from '../../place/place.service';
 import {MatDialog} from '@angular/material/dialog';
-import {DetailPlaceDialog} from '../../place/detail-place/detail-place.dialog';
+import {DetailPlaceComponent} from '../../place/detail-place/detail-place.component';
 
 @Component({
   selector: 'app-edit-route',
@@ -27,12 +27,10 @@ export class EditRouteComponent implements OnInit {
               private location: Location,
               private routeService: RouteService,
               private  placeService: PlaceService,
-              private store: StoreService,
               public dialog: MatDialog) {
   }
 
   ngOnInit() {
-    this.route.account = this.store.currentAccount.account;
     this.activatedRoute.paramMap.switchMap((params: ParamMap) =>
       this.routeService.getRoute(+params.get('id'))).subscribe(
       val => {
@@ -73,7 +71,7 @@ export class EditRouteComponent implements OnInit {
   }
 
   gotoPlaceDetail(place: Place) {
-    let placeDialogRef = this.dialog.open(DetailPlaceDialog, {
+    let placeDialogRef = this.dialog.open(DetailPlaceComponent, {
       width: '500px',
       data: {place: place}
     });

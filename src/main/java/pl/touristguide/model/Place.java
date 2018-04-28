@@ -2,7 +2,6 @@ package pl.touristguide.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,15 +27,19 @@ public class Place {
     @Column(name = "LONGITUDE", precision = 16, scale = 13, nullable = false)
     private BigDecimal longitude;
 
+    @Column(name = "WEBSITE_LINK")
+    private String websiteLink;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "CATEGORY_ID", referencedColumnName="CATEGORY_ID")
     private Category category;
 
-    /*@OneToMany(mappedBy = "place", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<RoutePlace> routePlaces;*/
-
     @ManyToMany(mappedBy = "places")
     private List<Route> routes;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ACCOUNT_ID")
+    private Account account;
 
 
     public Place() {
@@ -90,6 +93,14 @@ public class Place {
         this.longitude = longitude;
     }
 
+    public String getWebsiteLink() {
+        return websiteLink;
+    }
+
+    public void setWebsiteLink(String websiteLink) {
+        this.websiteLink = websiteLink;
+    }
+
     public Category getCategory() {
         return category;
     }
@@ -104,6 +115,14 @@ public class Place {
 
     public void setRoutes(List<Route> routes) {
         this.routes = routes;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     @Override

@@ -175,7 +175,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .main .search-box,
-.main .add-box {
+.main .add-box,
+.main .edit-box {
   padding: 10px;
   background: #ebf0f6;
   margin-top: 24px;

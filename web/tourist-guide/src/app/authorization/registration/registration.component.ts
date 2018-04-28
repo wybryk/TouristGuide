@@ -55,7 +55,7 @@ export class RegistrationComponent implements OnInit {
     }
 
     if(this.errorMessages.length === 0) {
-      this.authService.regitration(this.user).subscribe(result => {
+      this.authService.registration(this.user).subscribe(result => {
           this.store.currentAccount = result;
           this.router.navigate(['/dashboard']);
         },

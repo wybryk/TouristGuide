@@ -7,7 +7,7 @@ import java.util.Queue;
 public class RouteDTO implements Serializable {
     private Long routeId;
     private String name;
-    private AccountDTO account;
+    private Long accountId;
     private BigDecimal routeLength;
     private Queue<PlaceDTO> places;
 
@@ -27,12 +27,12 @@ public class RouteDTO implements Serializable {
         this.name = name;
     }
 
-    public AccountDTO getAccount() {
-        return account;
+    public Long getAccountId() {
+        return accountId;
     }
 
-    public void setAccount(AccountDTO account) {
-        this.account = account;
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
     public BigDecimal getRouteLength() {

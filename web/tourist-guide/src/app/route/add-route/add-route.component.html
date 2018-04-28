@@ -1,5 +1,5 @@
 <div class="add-box">
-  <div class="add-field add-name">
+  <div class="add-field add-name" *ngIf="authService.isUserLoggedIn">
     <mat-form-field class="add-field add-name">
       <input matInput placeholder="Nazwa" [(ngModel)]="route.name" required>
     </mat-form-field>

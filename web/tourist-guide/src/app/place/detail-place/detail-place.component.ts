@@ -1,41 +1,43 @@
-import {Component, OnInit} from '@angular/core';
-import {Router, ActivatedRoute, ParamMap} from '@angular/router';
-import {Location} from '@angular/common';
+import {Component, Inject, OnInit} from '@angular/core';
 
 import 'rxjs/add/operator/switchMap';
 
 import {PlaceService} from '../place.service';
 import {Place} from '../../common/model/place';
 import {Category} from '../../common/model/category';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 
 @Component({
-  selector: 'detail-place',
+  selector: 'detail-place-component',
   templateUrl: './detail-place.component.html',
   styleUrls: ['./detail-place.component.css']
 })
 
 export class DetailPlaceComponent implements OnInit {
   place = new Place();
-  canEdit: boolean = true;
+  canEdit: boolean = false;
 
-  constructor(private router: Router,
-              private route: ActivatedRoute,
-              private location: Location,
+  constructor(public dialogRef: MatDialogRef<DetailPlaceComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any,
               private placeService: PlaceService) {
   }
 
   ngOnInit() {
     this.place.category = new Category();
-    this.route.paramMap.switchMap((params: ParamMap) =>
-      this.placeService.getPlace(+params.get('id'))).subscribe(val => this.place = val);
+    this.canEdit = this.data.canEdit;
+    this.getPlace();
   }
 
-  gotoPlaceEdit(placeId: number) {
-    this.router.navigate(['/edit', placeId]);
+  getPlace() {
+    this.placeService.getPlace(this.data.placeId).subscribe(
+      result => {
+        this.place = result;
+      }
+    );
   }
 
   goBack() {
-    this.location.back();
+    this.dialogRef.close();
   }
 }

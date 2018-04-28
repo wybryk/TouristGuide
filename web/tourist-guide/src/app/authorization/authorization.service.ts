@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map';
 export class AuthorizationService {
   private _userUrl = 'http://localhost:9090/touristguide/rest/user/';
 
-  isUserLoggedIn = false;
+  isUserLoggedIn = true;
   userData: any = {};
 
   constructor(private http: HttpClient,
@@ -30,7 +30,7 @@ export class AuthorizationService {
     );
   }
 
-  regitration(user: UserDetail): Observable<any> {
+  registration(user: UserDetail): Observable<any> {
     return this.http.post(this._userUrl + 'registration', user).map(
       result => {
         this.isUserLoggedIn = true;
@@ -39,6 +39,19 @@ export class AuthorizationService {
         return result;
       }
     );
+  }
+
+  updateAccount(user: UserDetail): Observable<any> {
+    return this.http.patch(this._userUrl + '/' + user.userDetailId, user).map(
+      result => {
+        this.userData = result;
+        return result;
+      }
+    );
+  }
+
+  deleteUser(userId: number): Observable<any> {
+    return this.http.delete(this._userUrl + '/' + userId);
   }
 
   logout(): void {

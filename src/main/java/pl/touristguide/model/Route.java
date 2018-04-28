@@ -22,9 +22,6 @@ public class Route {
     @JoinColumn(name = "ACCOUNT_ID")
     private Account account;
 
-    /*OneToMany(mappedBy = "route", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Queue<RoutePlace> routePlaces;*/
-
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "ROUTE_PLACE", joinColumns = {@JoinColumn(name = "ROUTE_ID")}, inverseJoinColumns = {@JoinColumn(name = "PLACE_ID")})
     private List<Place> places;
@@ -63,14 +60,6 @@ public class Route {
     public void setAccount(Account account) {
         this.account = account;
     }
-
-    /*public Queue<RoutePlace> getRoutePlaces() {
-        return routePlaces;
-    }
-
-    public void setRoutePlaces(Queue<RoutePlace> routePlaces) {
-        this.routePlaces = routePlaces;
-    }*/
 
     public List<Place> getPlaces() {
         return places;

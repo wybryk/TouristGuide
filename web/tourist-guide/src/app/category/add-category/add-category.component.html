@@ -5,9 +5,9 @@
         <input matInput placeholder="Nazwa" [(ngModel)]="category.name" required>
       </mat-form-field>
     </div>
-    <div class="add-field add-img">
+    <!--<div class="add-field add-img">
       <input type="file" (change)="readImage($event)">
-    </div>
+    </div>-->
     <div>
       <button mat-button [disabled]="!category.name || !category.image" (click)="addCategory()">Dodaj</button>
       <button mat-button (click)="clear()">Wyczyść</button>

@@ -26,6 +26,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { PlaceService } from './place/place.service';
 import { CategoryService } from './category/category.service';
@@ -46,8 +47,8 @@ import { DetailRouteComponent } from './route/detail-route/detail-route.componen
 import { RoutesComponent } from './route/routes/routes.component';
 import {RouteService} from './route/route.service';
 import {AgmDirectionModule} from 'agm-direction';
-import {DetailPlaceDialog} from './place/detail-place/detail-place.dialog';
 import {PickListModule} from 'primeng/primeng';
+import { MyUserComponent } from './user/my-user/my-user.component';
 
 @NgModule({
   declarations: [
@@ -69,10 +70,11 @@ import {PickListModule} from 'primeng/primeng';
     EditRouteComponent,
     DetailRouteComponent,
     RoutesComponent,
-    DetailPlaceDialog
+    MyUserComponent
   ],
   entryComponents: [
-    DetailPlaceDialog
+    DetailPlaceComponent,
+    EditPlaceComponent
   ],
   imports: [
     CommonModule,
@@ -96,6 +98,7 @@ import {PickListModule} from 'primeng/primeng';
     MatMenuModule,
     MatGridListModule,
     MatDialogModule,
+    MatTabsModule,
     PickListModule
   ],
   providers: [

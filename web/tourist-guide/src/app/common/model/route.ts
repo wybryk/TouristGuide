@@ -4,6 +4,6 @@ import {UserAccount} from './user-account';
 export class Route {
   routeId: number;
   name: string
-  account: UserAccount;
+  accountId: number;
   places: Place[];
 }

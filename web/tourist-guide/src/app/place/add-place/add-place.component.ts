@@ -6,6 +6,7 @@ import {Place} from '../../common/model/place';
 import {Category} from '../../common/model/category';
 import {CategoryService} from '../../category/category.service';
 import {PlaceService} from '../place.service';
+import {StoreService} from '../../common/store.service';
 
 
 @Component({
@@ -20,7 +21,9 @@ export class AddPlaceComponent implements OnInit {
   categoryControl = new FormControl('', [Validators.required]);
   locationChosen: boolean = false;
 
-  constructor(private categoryService: CategoryService, private placeService: PlaceService) {
+  constructor(private categoryService: CategoryService,
+              private placeService: PlaceService,
+              private store: StoreService) {
   }
 
   ngOnInit() {
@@ -30,6 +33,7 @@ export class AddPlaceComponent implements OnInit {
   }
 
   addPlace() {
+    this.place.accountId = this.store.currentAccount.account.accountId;
     this.placeService.addPlace(this.place).subscribe(val => {
       this.clear();
     }, error => {

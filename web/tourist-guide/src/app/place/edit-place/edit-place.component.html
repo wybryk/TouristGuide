@@ -1,3 +1,47 @@
-<p>
-  edit-place works!
-</p>
+<div class="edit-box">
+  <div class="edit-div">
+    <div class="edit-field edit-name">
+      <mat-form-field class="name-field">
+        <input matInput placeholder="Nazwa" [(ngModel)]="place.name" required>
+      </mat-form-field>
+    </div>
+    <div class="edit-field edit-description">
+      <mat-form-field class="description-field">
+        <textarea matInput placeholder="Opis" [(ngModel)]="place.description" required></textarea>
+      </mat-form-field>
+    </div>
+    <div class="edit-field edit-category">
+      <mat-form-field class="category-field">
+        <mat-select placeholder="Kategoria" [(ngModel)]="place.category" name="category" [formControl]="categoryControl"
+                    required>
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{category.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="categoryControl.hasError('required')">Proszę wybrać kategorię</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="edit-field edit-website-link">
+      <mat-form-field class="website-link-field">
+        <input matInput placeholder="Link do strony internetowej" [(ngModel)]="place.websiteLink" >
+      </mat-form-field>
+    </div>
+    <div class="edit-field edit-img">
+      <input type="file" (change)="readImage($event)">
+    </div>
+  </div>
+  <div class="edit-div">
+    <div class="edit-field edit-coordinates">
+      <agm-map [latitude]="place.lat" [longitude]="place.lng" [zoom]=14 (mapClick)="onChoseLocation($event)">
+        <agm-marker [latitude]="place.lat" [longitude]="place.lng"></agm-marker>
+      </agm-map>
+    </div>
+  </div>
+  <div style="clear: both"></div>
+  <div class="edit-field edit-buttons">
+    <button mat-button [disabled]="!place.category  || !place.name || !place.description"
+            (click)="editPlace()">Edytuj
+    </button>
+    <button mat-button (click)="goBack()">Wróć</button>
+  </div>
+</div>

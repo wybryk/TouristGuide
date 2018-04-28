@@ -25,8 +25,8 @@
       </a>
       <mat-menu #appMenu="matMenu">
         <button mat-menu-item [routerLink]="['/user/edit']">Edytuj</button>
-        <button mat-menu-item [routerLink]="['/user/detail']">Szczegóły</button>
-        <button mat-menu-item [routerLink]="['/routes']">Moje trasy</button>
+        <!--<button mat-menu-item [routerLink]="['/user/detail']">Szczegóły</button>-->
+        <button mat-menu-item [routerLink]="['/my-user']">Moje konto</button>
         <button mat-menu-item (click)="logout()">Wyloguj</button>
       </mat-menu>
     </mat-nav-list>

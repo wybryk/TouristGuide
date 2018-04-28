@@ -25,6 +25,9 @@ public class Account {
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Route> routes;
 
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Place> places;
+
     public Account() {
         this.routes = new ArrayList<>();
     }
@@ -67,5 +70,13 @@ public class Account {
 
     public void setRoutes(List<Route> routes) {
         this.routes = routes;
+    }
+
+    public List<Place> getPlaces() {
+        return places;
+    }
+
+    public void setPlaces(List<Place> places) {
+        this.places = places;
     }
 }

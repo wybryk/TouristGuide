@@ -8,32 +8,39 @@
       </mat-toolbar>
     </mat-card-title>
     <mat-card-content>
-      <form>
+      <form [formGroup]="editUserForm">
         <mat-form-field style="width: 100%">
-          <input matInput [(ngModel)]="user.name" name="name" placeholder="Imię" type="text">
+          <input matInput formControlName="name" [(ngModel)]="user.name" name="name" placeholder="Imię" type="text">
         </mat-form-field>
         <mat-form-field style="width: 100%">
-          <input matInput [(ngModel)]="user.email" name="email" placeholder="Email" type="email">
+          <input matInput formControlName="email" [(ngModel)]="user.email" name="email" placeholder="Email" type="email">
         </mat-form-field>
         <mat-form-field style="width: 100%">
-          <input matInput [(ngModel)]="user.account.login" name="login" placeholder="Login" type="text">
+          <input matInput formControlName="login" [(ngModel)]="user.account.login" name="login" placeholder="Login" type="text">
         </mat-form-field>
-        <div class="button-row avatar-upload">
+        <mat-form-field style="width: 100%">
+          <input matInput formControlName="currentPassword" [(ngModel)]="user.account.currentPassword" name="currentPassword" placeholder="Obecne hasło"
+                 type="password">
+        </mat-form-field>
+        <mat-form-field style="width: 100%">
+          <input matInput formControlName="password" [(ngModel)]="user.account.password" name="password" placeholder="Hasło" type="password">
+        </mat-form-field>
+        <mat-form-field style="width: 100%">
+          <input matInput formControlName="repeatPassword" [(ngModel)]="repeatPassword" name="repeatPassword" placeholder="Powtórz hasło" type="password">
+        </mat-form-field>
+        <!--<div class="button-row avatar-upload">
           <button mat-button color="white" mat-mini-fab (click)="imgFileInput.click()">
             <i class="fa fa-upload" aria-hidden="true"></i>
           </button>
-          <input hidden type="file" #imgFileInput (change)="readImage($event)"/></div>
-        <mat-form-field style="width: 100%">
-          <input matInput [(ngModel)]="user.account.password" name="password" placeholder="Hasło" type="password">
-        </mat-form-field>
-        <mat-form-field style="width: 100%">
-          <input matInput [(ngModel)]="password" name="reapeatPassword" placeholder="Powtórz hasło" type="password">
-        </mat-form-field>
-        <button mat-raised-button (click)="editUserAccount()">Edytuj</button>
-        <button mat-raised-button (click)="deleteAccount()">Usuń</button>
+          <input hidden type="file" #imgFileInput (change)="readImage($event)"/>
+        </div>-->
+        <footer>
+          <button mat-raised-button type="submit"(click)="editUserAccount()">Edytuj</button>
+          <button mat-raised-button (click)="deleteAccount()">Usuń</button>
+        </footer>
       </form>
       <br>
-      <div *ngIf="errors" label="Error!" sublabel="Wrong login / password." color="warn" icon="error"></div>
+      <div *ngIf="errorMessages.length > 0" label="Error!" icon="error" style="color: red">{{errorMessages}}</div>
     </mat-card-content>
   </mat-card>
 </div>

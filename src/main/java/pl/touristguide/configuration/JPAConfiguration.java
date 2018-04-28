@@ -40,7 +40,7 @@ public class JPAConfiguration {
         jpaProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
         jpaProperties.setProperty("hibernate.show_sql", "false");
         jpaProperties.setProperty("hibernate.format_sql", "true");
-        //jpaProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        jpaProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
         //jpaProperties.setProperty("jadira.usertype.autoRegisterUserTypes", "true");
         jpaProperties.setProperty("hibernate.temp.use_jdbc_metadata_defaults", "false");
 

@@ -1,0 +1,13 @@
+<div class="results user-tabs">
+  <mat-tab-group>
+    <mat-tab label="Moje dane">
+      <app-edit-user></app-edit-user>
+    </mat-tab>
+    <mat-tab label="Moje miejsca">
+      <app-places [userPlaces]="true"></app-places>
+    </mat-tab>
+    <mat-tab label="Moje trasy">
+      <app-routes></app-routes>
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -18,6 +18,7 @@ import {AddRouteComponent} from '../route/add-route/add-route.component';
 import {EditRouteComponent} from '../route/edit-route/edit-route.component';
 import {RoutesComponent} from '../route/routes/routes.component';
 import {DetailRouteComponent} from '../route/detail-route/detail-route.component';
+import {MyUserComponent} from '../user/my-user/my-user.component';
 
 
 const routes: Routes = [
@@ -87,8 +88,8 @@ const routes: Routes = [
     component: EditRouteComponent
   },
   {
-    path: 'routes',
-    component: RoutesComponent
+    path: 'my-user',
+    component: MyUserComponent
   }
 ];
 

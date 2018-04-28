@@ -8,4 +8,6 @@ export class Place {
     image: string;
     lat: number;
     lng: number;
+    accountId: number;
+    websiteLink: string;
 }

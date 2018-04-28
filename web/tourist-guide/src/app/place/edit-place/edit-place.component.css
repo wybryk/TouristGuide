@@ -1,0 +1,42 @@
+.edit-box {
+  width: 100%;
+  pediting-top: 50px;
+  pediting-bottom: 20px;
+}
+
+.edit-div {
+  float: left;
+  width: 50%;
+}
+
+.edit-field {
+  width: 95%;
+  margin-bottom: 20px;
+}
+
+.name-field, .description-field, .category-field, .website-link-field {
+  width: 100%;
+  margin: 5px 0;
+}
+
+.description-field textarea {
+  height: 100px;
+}
+
+.edit-img {
+  margin: 10px 0;
+}
+
+.edit-coordinates {
+  height: 100%;
+}
+
+agm-map {
+  height: 470px;
+  width: 100%;
+}
+
+.edit-buttons {
+  margin-top: 40px;
+  border-top: 1px solid #888b8f;
+}

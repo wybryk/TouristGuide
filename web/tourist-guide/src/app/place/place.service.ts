@@ -37,4 +37,8 @@ export class PlaceService {
     searchPlacesByCategoryId(categoryId: number): Observable<Place[]> {
         return this.http.get<Place[]>(this.placeUrl + "/search/category/" + categoryId);
     }
+
+    getUserPlaces(accountId: number): Observable<Place[]> {
+      return this.http.get<Place[]>(this.placeUrl + '/search/user/' + accountId);
+    }
 }

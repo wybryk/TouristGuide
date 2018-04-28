@@ -23,6 +23,7 @@ public class PlaceMapper {
         place.setDescription(placeDTO.getDescription());
         place.setLatitude(placeDTO.getLat());
         place.setLongitude(placeDTO.getLng());
+        place.setWebsiteLink(placeDTO.getWebsiteLink());
         place.setCategory(CategoryMapper.toCategory(placeDTO.getCategory()));
         return place;
     }
@@ -42,6 +43,7 @@ public class PlaceMapper {
         placeDTO.setImage(place.getImageName());
         placeDTO.setLat(place.getLatitude());
         placeDTO.setLng(place.getLongitude());
+        placeDTO.setWebsiteLink(place.getWebsiteLink());
         placeDTO.setCategory(CategoryMapper.toCategoryDTO(place.getCategory()));
         return placeDTO;
     }

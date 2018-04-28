@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 
 import {CategoryService} from '../../category/category.service';
@@ -7,14 +7,19 @@ import {Place} from '../../common/model/place';
 import {Category} from '../../common/model/category';
 import {Observable} from 'rxjs/Observable';
 import {AuthorizationService} from '../../authorization/authorization.service';
+import {DetailPlaceComponent} from '../detail-place/detail-place.component';
+import {EditPlaceComponent} from '../edit-place/edit-place.component';
+import {MatDialog} from '@angular/material/dialog';
+import {StoreService} from '../../common/store.service';
 
 @Component({
-  selector: 'places',
+  selector: 'app-places',
   templateUrl: './places.component.html',
   styleUrls: ['./places.component.css']
 })
 
 export class PlacesComponent implements OnInit {
+  @Input() userPlaces: boolean;
   places: Place[];
   categories: Category[];
   searchedPlace = new Place();
@@ -23,7 +28,9 @@ export class PlacesComponent implements OnInit {
               private route: ActivatedRoute,
               private placeService: PlaceService,
               private categoryService: CategoryService,
-              public authService: AuthorizationService) {
+              public authService: AuthorizationService,
+              private store: StoreService,
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -39,7 +46,12 @@ export class PlacesComponent implements OnInit {
       return this.placeService.searchPlacesByCategoryId(categoryId);
     }
     else {
-      return this.placeService.getPlaces();
+      if (this.userPlaces) {
+        return this.placeService.getUserPlaces(this.store.currentAccount.account.accountId);
+      }
+      else {
+        return this.placeService.getPlaces();
+      }
     }
   }
 
@@ -52,7 +64,22 @@ export class PlacesComponent implements OnInit {
   }
 
   gotoDetail(placeId: number) {
-    this.router.navigate(['/place/detail', placeId]);
+    let placeDialogRef = this.dialog.open(DetailPlaceComponent, {
+      width: '1000px',
+      data: {
+        placeId: placeId,
+        canEdit: false
+      }
+    });
+  }
+
+  gotoEdit(placeId: number) {
+    let placeDialogRef = this.dialog.open(EditPlaceComponent, {
+      width: '1000px',
+      data: {
+        placeId: placeId
+      }
+    });
   }
 
   searchPlaces() {
@@ -64,12 +91,7 @@ export class PlacesComponent implements OnInit {
   }
 
   getAllPlaces() {
-    this.placeService.getPlaces().subscribe(
-      val => {
-        this.places = val;
-        this.searchedPlace = new Place();
-      }
-    );
+    this.router.navigate(['/places']);
   }
 
   deletePlace(placeId: number) {
@@ -78,9 +100,5 @@ export class PlacesComponent implements OnInit {
         value.placeId !== placeId;
       });
     });
-  }
-
-  gotoEdit(placeId: number) {
-    this.router.navigate(['/place/edit', placeId]);
   }
 }

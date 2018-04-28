@@ -105,4 +105,16 @@ public class PlaceRestController {
             return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @RequestMapping(value = "/search/user/{accountId}", method = RequestMethod.GET)
+    private ResponseEntity searchPlacesByAccountId(@PathVariable("accountId") Long accountId){
+        try {
+            List<PlaceDTO> placeDTOList = this.placeService.searchPlacesByAccountId(accountId);
+            return new ResponseEntity(placeDTOList, HttpStatus.OK);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

@@ -6,6 +6,7 @@ public class AccountDTO implements Serializable {
     private Long accountId;
     private String login;
     private String password;
+    private String currentPassword;
 
     public Long getAccountId() {
         return accountId;
@@ -29,5 +30,13 @@ public class AccountDTO implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCurrentPassword() {
+        return currentPassword;
+    }
+
+    public void setCurrentPassword(String currentPassword) {
+        this.currentPassword = currentPassword;
     }
 }

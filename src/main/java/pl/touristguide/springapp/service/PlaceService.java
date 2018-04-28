@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.touristguide.common.ImageUtils;
+import pl.touristguide.model.Account;
 import pl.touristguide.model.Place;
 import pl.touristguide.springapp.dao.PlaceDao;
 import pl.touristguide.springapp.dto.PlaceDTO;
@@ -19,11 +20,13 @@ import java.util.stream.Collectors;
 public class PlaceService {
     private final PlaceDao placeDao;
     private final CategoryService categoryService;
+    private final UserService userService ;
 
     @Autowired
-    public PlaceService(PlaceDao placeDao, CategoryService categoryService) {
+    public PlaceService(PlaceDao placeDao, CategoryService categoryService, UserService userService) {
         this.placeDao = placeDao;
         this.categoryService = categoryService;
+        this.userService = userService;
     }
 
     public List<PlaceDTO> getPlaces() throws Exception {
@@ -38,16 +41,17 @@ public class PlaceService {
 
     public PlaceDTO getPlace(Long placeId) {
         Optional<Place> place = this.placeDao.findById(placeId);
-
         return PlaceMapper.toPlaceDTO(place.get());
     }
 
     @Transactional
     public void insertPlace(PlaceDTO placeDTO) throws Exception {
         Place place = PlaceMapper.toPlace(placeDTO);
+        Account account = userService.findAccountById(placeDTO.getAccountId());
         place.setImageName(ImageUtils.createImage(placeDTO.getImage(), placeDTO.getName()));
-        System.out.println(place.toString());
+        place.setAccount(account);
         place.setCategory(this.categoryService.getCategory(placeDTO.getCategory().getCategoryId()));
+        System.out.println(place.toString());
         this.placeDao.save(place);
     }
 
@@ -92,6 +96,13 @@ public class PlaceService {
 
     public List<PlaceDTO> searchPlacesByCategoryId(Long categoryId) throws Exception {
         return this.categoryService.getCategory(categoryId).getPlaces()
+                .stream()
+                .map(tmpPlace -> PlaceMapper.toPlaceDTO(tmpPlace))
+                .collect(Collectors.toList());
+    }
+
+    public List<PlaceDTO> searchPlacesByAccountId(Long accountId) throws Exception {
+        return this.userService.findAccountById(accountId).getPlaces()
                 .stream()
                 .map(tmpPlace -> PlaceMapper.toPlaceDTO(tmpPlace))
                 .collect(Collectors.toList());

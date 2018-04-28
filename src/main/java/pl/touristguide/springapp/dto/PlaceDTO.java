@@ -11,6 +11,8 @@ public class PlaceDTO implements Serializable {
     private String image;
     private BigDecimal lat;
     private BigDecimal lng;
+    private String websiteLink;
+    private Long accountId;
 
     public Long getPlaceId() {
         return placeId;
@@ -66,5 +68,21 @@ public class PlaceDTO implements Serializable {
 
     public void setLng(BigDecimal lng) {
         this.lng = lng;
+    }
+
+    public String getWebsiteLink() {
+        return websiteLink;
+    }
+
+    public void setWebsiteLink(String websiteLink) {
+        this.websiteLink = websiteLink;
+    }
+
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 }

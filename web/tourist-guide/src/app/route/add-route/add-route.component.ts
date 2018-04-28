@@ -4,9 +4,10 @@ import {Place} from '../../common/model/place';
 import {PlaceService} from '../../place/place.service';
 import {RouteService} from '../route.service';
 import {StoreService} from '../../common/store.service';
-import {DetailPlaceDialog} from '../../place/detail-place/detail-place.dialog';
+import {DetailPlaceComponent} from '../../place/detail-place/detail-place.component';
 import {MatDialog} from '@angular/material/dialog';
 import {AuthorizationService} from '../../authorization/authorization.service';
+import {PickList} from 'primeng/primeng';
 
 @Component({
   selector: 'app-add-route',
@@ -30,7 +31,6 @@ export class AddRouteComponent implements OnInit {
     this.route = new Route();
     this.route.places = new Array();
     this.getPlaces();
-    this.route.account = this.store.currentAccount.account;
   }
 
   getPlaces() {
@@ -42,11 +42,12 @@ export class AddRouteComponent implements OnInit {
   }
 
   addRoute() {
+    this.route.accountId = this.store.currentAccount.account.accountId;
     this.routeService.addRoute(this.route).subscribe(() => {});
   }
 
   gotoPlaceDetail(place: Place) {
-    let placeDialogRef = this.dialog.open(DetailPlaceDialog, {
+    let placeDialogRef = this.dialog.open(DetailPlaceComponent, {
       width: '1000px',
       data: {
         placeId: place.placeId,

@@ -6,6 +6,7 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 10px;
+  width: 80%;
 }
 
 .add-name {
@@ -13,7 +14,6 @@
 }
 
 .add-coordinates {
-  width: 80%;
   margin-bottom: 20px;
 }
 

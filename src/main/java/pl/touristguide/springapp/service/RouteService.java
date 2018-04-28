@@ -3,8 +3,6 @@ package pl.touristguide.springapp.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.touristguide.model.Account;
-import pl.touristguide.model.Route;
-import pl.touristguide.model.UserDetail;
 import pl.touristguide.springapp.dao.RouteDao;
 import pl.touristguide.springapp.dto.RouteDTO;
 import pl.touristguide.springapp.mapper.RouteMapper;
@@ -36,12 +34,12 @@ public class RouteService {
     }
 
     public void insertRoute(RouteDTO routeDTO) throws Exception {
-        Account account = userService.findAccountById(routeDTO.getAccount().getAccountId());
+        Account account = userService.findAccountById(routeDTO.getAccountId());
         this.routeDao.save(RouteMapper.toRoute(routeDTO, account));
     }
 
     public void updateRoute(Long routeId, RouteDTO routeDTO) throws Exception {
-        Account account = userService.findAccountById(routeDTO.getAccount().getAccountId());
+        Account account = userService.findAccountById(routeDTO.getAccountId());
         this.routeDao.save(RouteMapper.toRoute(routeDTO, account));
     }
 
