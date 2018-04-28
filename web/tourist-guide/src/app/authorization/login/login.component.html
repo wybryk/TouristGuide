@@ -8,17 +8,17 @@
       </mat-toolbar>
     </mat-card-title>
     <mat-card-content>
-      <form (ngSubmit)="onSubmit()">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <mat-form-field style="width: 100%">
-          <input matInput [(ngModel)]="user.login" name="login" placeholder="Login" type="text">
+          <input matInput formControlName="login" [(ngModel)]="user.login" name="login" placeholder="Login" type="text">
         </mat-form-field>
         <mat-form-field style="width: 100%">
-          <input matInput [(ngModel)]="user.password" name="password" placeholder="Hasło" type="password">
+          <input matInput formControlName="password" [(ngModel)]="user.password" name="password" placeholder="Hasło" type="password">
         </mat-form-field>
         <button mat-raised-button type="submit">Zaloguj się</button>
       </form>
       <br>
-      <div *ngIf="errors" label="Error!" sublabel="Wrong login / password." color="warn" icon="error"></div>
+      <div *ngIf="errorMessages.length > 0" label="Error!" icon="error" style="color: red">{{errorMessages}}</div>
     </mat-card-content>
   </mat-card>
 </div>

@@ -25,33 +25,45 @@ public class UserService {
     }
 
     public UserDetailDTO registration(UserDetailDTO userDetailDTO) throws Exception {
+        if (findAccountByLogin(userDetailDTO.getAccount()).isPresent()) {
+            throw new Exception("Konto o podanym loginie już istnieje.");
+        }
+
+        if (findUserDetailByEmail(userDetailDTO).isPresent()) {
+            throw new Exception("Istnieje już konto przypisane do podanego adresu email.");
+        }
+
         UserDetail userDetail = userDetailDao.save(UserMapper.toUserDetail(userDetailDTO));
-        System.out.println(userDetail);
         AccountDTO accountDTO = userDetailDTO.getAccount();
-        accountDTO.setPassword(HashUtils.generateHash(accountDTO.getPassword(),  10));
-        System.out.println(accountDTO.getPassword());
+        accountDTO.setPassword(HashUtils.generateHash(accountDTO.getPassword(), 10));
         Account account = accountDao.save(UserMapper.toAccount(accountDTO, userDetail));
-        System.out.println(account);
         return UserMapper.toUserDTO(account);
     }
 
     public UserDetailDTO login(AccountDTO accountDTO) throws Exception {
-        Account modelAccount = findAccount(accountDTO);
+        Optional<Account> optionalAccount = findAccountByLogin(accountDTO);
+        Account modelAccount;
+
+        if (optionalAccount.isPresent()) {
+            modelAccount = optionalAccount.get();
+        }
+        else {
+            throw new Exception("Niepoprawny login lub hasło.");
+        }
 
         if (HashUtils.verifyPassword(accountDTO.getPassword(), modelAccount.getPassword())) {
             return UserMapper.toUserDTO(modelAccount);
         } else {
-            throw new Exception(modelAccount.getLogin());
+            throw new Exception("Niepoprawny login lub hasło.");
         }
     }
 
-    private Account findAccount(AccountDTO accountDTO) throws Exception {
-        Optional<Account> account = accountDao.findAccountByLogin(accountDTO.getLogin());
-        if (account.get() == null) {
-            throw new Exception(Account.class.getSimpleName());
-        }
+    public void updateUserAccount(Long userDetailId, UserDetailDTO userDetailDTO) {
 
-        return account.get();
+    }
+
+    public void deleteUserAccount(Long userDetailId) {
+        userDetailDao.deleteById(userDetailId);
     }
 
     public Account findAccountById(Long accountId) throws Exception {
@@ -63,10 +75,11 @@ public class UserService {
         return account.get();
     }
 
-    public void updateUserAccount(Long userDetailId, UserDetailDTO userDetailDTO) {
-
+    private Optional<Account> findAccountByLogin(AccountDTO accountDTO) throws Exception {
+        return accountDao.findAccountByLogin(accountDTO.getLogin());
     }
 
-    public void deleteUserAccount(Long userDetailId) {
+    private Optional<UserDetail> findUserDetailByEmail(UserDetailDTO userDetailDTO) throws Exception {
+        return userDetailDao.findUserDetailsByEmail(userDetailDTO.getEmail());
     }
 }

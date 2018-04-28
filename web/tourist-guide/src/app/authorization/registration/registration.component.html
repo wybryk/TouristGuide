@@ -8,27 +8,26 @@
       </mat-toolbar>
     </mat-card-title>
     <mat-card-content>
-      <form (ngSubmit)="onSubmit()">
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
         <mat-form-field style="width: 100%">
-          <input matInput [(ngModel)]="user.name" name="name" placeholder="Imię" type="text">
+          <input matInput formControlName="name" [(ngModel)]="user.name" name="name" placeholder="Imię" type="text">
         </mat-form-field>
         <mat-form-field style="width: 100%">
-          <input matInput [(ngModel)]="user.email" name="email" placeholder="Email" type="email">
+          <input matInput formControlName="email" [(ngModel)]="user.email" name="email" placeholder="Email" type="email">
         </mat-form-field>
         <mat-form-field style="width: 100%">
-          <input matInput [(ngModel)]="user.account.login" name="login" placeholder="Login" type="text">
+          <input matInput formControlName="login" [(ngModel)]="user.account.login" name="login" placeholder="Login" type="text">
         </mat-form-field>
         <mat-form-field style="width: 100%">
-          <input matInput [(ngModel)]="user.account.password" name="password" placeholder="Hasło" type="password">
+          <input matInput formControlName="password" [(ngModel)]="user.account.password" name="password" placeholder="Hasło" type="password">
         </mat-form-field>
         <mat-form-field style="width: 100%">
-          <input matInput [(ngModel)]="password" name="reapeatPassword" placeholder="Powtórz hasło" type="password">
+          <input matInput formControlName="repeatPassword" [(ngModel)]="password" name="repeatPassword" placeholder="Powtórz hasło" type="password">
         </mat-form-field>
         <button mat-raised-button type="submit">Zarejestruj się</button>
       </form>
       <br>
-      <div *ngIf="errors" label="Error!" sublabel="Wrong login / password." color="warn"
-           icon="error"></div>
+      <div *ngIf="errorMessages.length > 0" label="Error!" icon="error" style="color: red">{{errorMessages}}</div>
     </mat-card-content>
   </mat-card>
 </div>
