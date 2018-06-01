@@ -8,6 +8,8 @@ import {StoreService} from '../../common/store.service';
 import {PlaceService} from '../../place/place.service';
 import {MatDialog} from '@angular/material/dialog';
 import {DetailPlaceComponent} from '../../place/detail-place/detail-place.component';
+import {Category} from '../../common/model/category';
+import {CategoryService} from '../../category/category.service';
 
 @Component({
   selector: 'app-edit-route',
@@ -16,7 +18,10 @@ import {DetailPlaceComponent} from '../../place/detail-place/detail-place.compon
 })
 export class EditRouteComponent implements OnInit {
   route = new Route();
+  allPlaces: Place[];
   places: Place[];
+  categories: Category[];
+  selectedCategory: Category;
   filterPlaces: Place[] = new Array();
 
   latitude = 50.866025381805336;
@@ -27,6 +32,7 @@ export class EditRouteComponent implements OnInit {
               private location: Location,
               private routeService: RouteService,
               private  placeService: PlaceService,
+              private categoryService: CategoryService,
               public dialog: MatDialog) {
   }
 
@@ -36,6 +42,7 @@ export class EditRouteComponent implements OnInit {
       val => {
         this.route = val;
         this.getPlaces();
+        this.getCategories();
       }
     );
   }
@@ -47,6 +54,12 @@ export class EditRouteComponent implements OnInit {
         this.filtrPlaces();
       }
     );
+  }
+
+  getCategories() {
+    this.categoryService.getCategories().subscribe(val => {
+      this.categories = val;
+    });
   }
 
   filtrPlaces() {
@@ -79,6 +92,15 @@ export class EditRouteComponent implements OnInit {
     placeDialogRef.afterClosed().subscribe(result => {
       console.log("close");
     });
+  }
+
+  filerPlaces() {
+    if(this.selectedCategory) {
+      this.places = this.allPlaces.filter(tmpPlace => tmpPlace.category.categoryId === this.selectedCategory.categoryId)
+    }
+    else {
+      this.places = this.allPlaces;
+    }
   }
 
   clear() {

@@ -19,10 +19,20 @@
       </agm-info-window>
     </agm-map>
   </div>
+  <div class="add-field">
+    <mat-form-field class="category-field">
+      <mat-select placeholder="Kategoria"  name="category" [(ngModel)]="selectedCategory" (change)="filerPlaces()">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{category.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
   <div class="add-field add-places">
     <p-pickList [source]="places" [target]="route.places" sourceHeader="Dostępne miejsca" targetHeader="Wybrane miejsca"
                 [responsive]="true" filterBy="name" dragdrop="true" dragdropScope="places"
-                sourceFilterPlaceholder="Nazwa" targetFilterPlaceholder="Nazwa"
+                sourceFilterPlaceholder="Nazwa" [showSourceFilter]="true" [showTargetFilter]="false"
                 [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}">
       <ng-template let-place pTemplate="item">
         <div class="ui-helper-clearfix">

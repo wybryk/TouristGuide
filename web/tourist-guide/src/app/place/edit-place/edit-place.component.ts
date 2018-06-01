@@ -51,7 +51,6 @@ export class EditPlaceComponent implements OnInit {
     }, error => {
       console.log(error);
     });
-    console.log(this.place);
   }
 
   readImage(event: any) {

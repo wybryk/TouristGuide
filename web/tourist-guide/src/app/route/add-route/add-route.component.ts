@@ -8,6 +8,8 @@ import {DetailPlaceComponent} from '../../place/detail-place/detail-place.compon
 import {MatDialog} from '@angular/material/dialog';
 import {AuthorizationService} from '../../authorization/authorization.service';
 import {PickList} from 'primeng/primeng';
+import {CategoryService} from '../../category/category.service';
+import {Category} from '../../common/model/category';
 
 @Component({
   selector: 'app-add-route',
@@ -16,7 +18,10 @@ import {PickList} from 'primeng/primeng';
 })
 export class AddRouteComponent implements OnInit {
   route: Route;
+  allPlaces: Place[];
   places: Place[];
+  categories: Category[];
+  selectedCategory: Category;
   latitude = 50.866025381805336;
   longitude = 20.628521202597767;
 
@@ -24,6 +29,7 @@ export class AddRouteComponent implements OnInit {
               private  placeService: PlaceService,
               private store: StoreService,
               public authService: AuthorizationService,
+              private categoryService: CategoryService,
               public dialog: MatDialog) {
   }
 
@@ -31,11 +37,19 @@ export class AddRouteComponent implements OnInit {
     this.route = new Route();
     this.route.places = new Array();
     this.getPlaces();
+    this.getCategories();
+  }
+
+  getCategories() {
+    this.categoryService.getCategories().subscribe(val => {
+      this.categories = val;
+    });
   }
 
   getPlaces() {
     this.placeService.getPlaces().subscribe(
       result => {
+        this.allPlaces = result;
         this.places = result;
       }
     );
@@ -43,7 +57,13 @@ export class AddRouteComponent implements OnInit {
 
   addRoute() {
     this.route.accountId = this.store.currentAccount.account.accountId;
-    this.routeService.addRoute(this.route).subscribe(() => {});
+    this.routeService.addRoute(this.route).subscribe(
+      result => {
+        this.clear();
+      }, error => {
+        console.log(error);
+      }
+    );
   }
 
   gotoPlaceDetail(place: Place) {
@@ -61,6 +81,15 @@ export class AddRouteComponent implements OnInit {
     this.place.longitude = event.coords.lng;
     this.locationChosen = true;*/
     console.log(event);
+  }
+
+  filerPlaces() {
+    if(this.selectedCategory) {
+      this.places = this.allPlaces.filter(tmpPlace => tmpPlace.category.categoryId === this.selectedCategory.categoryId)
+    }
+    else {
+      this.places = this.allPlaces;
+    }
   }
 
   clear() {
