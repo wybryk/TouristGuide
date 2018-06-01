@@ -15,7 +15,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="search-field reset-search-button-div">
+    <div class="search-field reset-search-button-div" *ngIf="!userPlaces">
       <i class="fa fa-times fa-lg hover-element" aria-hidden="true" (click)="getAllPlaces()"></i>
     </div>
     <div class="search-field search-button-div">

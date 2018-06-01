@@ -51,13 +51,19 @@ public class UserService {
         }
     }
 
-    public void updateUserAccount(Long userDetailId, UserDetailDTO userDetailDTO) throws Exception {
+    public void updateUserDetail(Long userDetailId, UserDetailDTO userDetailDTO) throws Exception {
         validateUpdatedAccount(userDetailDTO);
         userDetailDTO.setUserDetailId(userDetailId);
-        AccountDTO accountDTO = userDetailDTO.getAccount();
-        accountDTO.setPassword(HashUtils.generateHash(accountDTO.getPassword(), 10));
         UserDetail userDetail = UserMapper.toUserDetail(userDetailDTO);
+        updateUserAccount(userDetailDTO.getAccount(), userDetail);
         this.userDetailDao.save(userDetail);
+    }
+
+    private void updateUserAccount(AccountDTO accountDTO, UserDetail userDetail) throws Exception {
+        if(accountDTO.getCurrentPassword() != null && accountDTO.getPassword() != null) {
+            accountDTO.setPassword(HashUtils.generateHash(accountDTO.getPassword(), 10));
+            this.accountDao.save(UserMapper.toAccount(accountDTO, userDetail));
+        }
     }
 
     public void deleteUserAccount(Long userDetailId) {

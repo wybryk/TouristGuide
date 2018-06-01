@@ -51,7 +51,7 @@ public class UserRestController {
     @RequestMapping(value = "/{userDetailId}", method = RequestMethod.PATCH)
     private ResponseEntity updateUserAccount(@PathVariable("userDetailId") Long userDetailId, @RequestBody UserDetailDTO userDetailDTO){
         try {
-            this.userService.updateUserAccount(userDetailId, userDetailDTO);
+            this.userService.updateUserDetail(userDetailId, userDetailDTO);
             return new ResponseEntity(HttpStatus.OK);
         }
         catch(Exception e){

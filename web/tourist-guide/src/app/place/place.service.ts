@@ -23,7 +23,7 @@ export class PlaceService {
     }
 
     updatePlace(place: Place): Observable<any> {
-        return this.http.put<any>(this.placeUrl + '/' + place.placeId, place);
+        return this.http.patch<any>(this.placeUrl + '/' + place.placeId, place);
     }
 
     deletePlace(placeId: number): Observable<any> {

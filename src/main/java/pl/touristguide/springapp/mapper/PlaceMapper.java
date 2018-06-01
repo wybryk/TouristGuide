@@ -45,6 +45,7 @@ public class PlaceMapper {
         placeDTO.setLng(place.getLongitude());
         placeDTO.setWebsiteLink(place.getWebsiteLink());
         placeDTO.setCategory(CategoryMapper.toCategoryDTO(place.getCategory()));
+        placeDTO.setAccountId(place.getAccount().getAccountId());
         return placeDTO;
     }
 }

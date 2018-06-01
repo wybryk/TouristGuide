@@ -8,6 +8,7 @@ import pl.touristguide.model.Account;
 import pl.touristguide.model.Place;
 import pl.touristguide.springapp.dao.PlaceDao;
 import pl.touristguide.springapp.dto.PlaceDTO;
+import pl.touristguide.springapp.mapper.CategoryMapper;
 import pl.touristguide.springapp.mapper.PlaceMapper;
 
 
@@ -56,8 +57,8 @@ public class PlaceService {
     }
 
     public void updatePlace(Long placeId, PlaceDTO placeDTO) throws Exception {
-        placeDTO.setPlaceId(placeId);
-        Place place = PlaceMapper.toPlace(placeDTO);
+        Place place = this.placeDao.findById(placeId).get();
+        rebuildPlace(place, placeDTO);
         this.placeDao.save(place);
     }
 
@@ -106,5 +107,15 @@ public class PlaceService {
                 .stream()
                 .map(tmpPlace -> PlaceMapper.toPlaceDTO(tmpPlace))
                 .collect(Collectors.toList());
+    }
+
+    private void rebuildPlace(Place place, PlaceDTO placeDTO) {
+        place.setName(placeDTO.getName());
+        place.setDescription(placeDTO.getDescription());
+        place.setLatitude(placeDTO.getLat());
+        place.setLongitude(placeDTO.getLng());
+        place.setWebsiteLink(placeDTO.getWebsiteLink());
+        place.setCategory(CategoryMapper.toCategory(placeDTO.getCategory()));
+        place.setImageName(placeDTO.getImage());
     }
 }
