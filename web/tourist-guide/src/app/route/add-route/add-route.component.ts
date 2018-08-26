@@ -7,7 +7,6 @@ import {StoreService} from '../../common/store.service';
 import {DetailPlaceComponent} from '../../place/detail-place/detail-place.component';
 import {MatDialog} from '@angular/material/dialog';
 import {AuthorizationService} from '../../authorization/authorization.service';
-import {PickList} from 'primeng/primeng';
 import {CategoryService} from '../../category/category.service';
 import {Category} from '../../common/model/category';
 
@@ -96,5 +95,6 @@ export class AddRouteComponent implements OnInit {
     this.getPlaces();
     this.route.name = null;
     this.route.places = new Array();
+    this.selectedCategory = null;
   }
 }

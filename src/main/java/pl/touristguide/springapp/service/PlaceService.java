@@ -11,7 +11,6 @@ import pl.touristguide.springapp.dto.PlaceDTO;
 import pl.touristguide.springapp.mapper.CategoryMapper;
 import pl.touristguide.springapp.mapper.PlaceMapper;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -49,7 +48,8 @@ public class PlaceService {
     public void insertPlace(PlaceDTO placeDTO) throws Exception {
         Place place = PlaceMapper.toPlace(placeDTO);
         Account account = userService.findAccountById(placeDTO.getAccountId());
-        place.setImageName(ImageUtils.createImage(placeDTO.getImage(), placeDTO.getName()));
+        if(placeDTO.getImage() != null && !placeDTO.getImage().equals(""))
+            place.setImageName(ImageUtils.createImage(placeDTO.getImage(), placeDTO.getName()));
         place.setAccount(account);
         place.setCategory(this.categoryService.getCategory(placeDTO.getCategory().getCategoryId()));
         System.out.println(place.toString());

@@ -37,7 +37,7 @@ public class Place {
     @ManyToMany(mappedBy = "places")
     private List<Route> routes;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "ACCOUNT_ID")
     private Account account;
 

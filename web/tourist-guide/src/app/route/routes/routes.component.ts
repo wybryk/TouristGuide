@@ -49,9 +49,7 @@ export class RoutesComponent implements OnInit {
 
   deleteRoute(routeId: number) {
     this.routeService.deleteRoute(routeId).subscribe(() => {
-      this.routes.filter(value => {
-        value.routeId !== routeId;
-      });
+      this.getAllRoutes();
     });
   }
 }

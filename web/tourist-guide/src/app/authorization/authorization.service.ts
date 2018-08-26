@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map';
 export class AuthorizationService {
   private _userUrl = 'http://localhost:9090/touristguide/rest/user/';
 
-  isUserLoggedIn = true;
+  isUserLoggedIn = false;
   userData: any = {};
 
   constructor(private http: HttpClient,

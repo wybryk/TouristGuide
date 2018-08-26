@@ -14,10 +14,11 @@ export class PagesComponent implements OnInit{
 
   constructor(public authService: AuthorizationService,
               private store: StoreService) {
+    this.user = this.store.currentAccount;
   }
 
   ngOnInit() {
-    this.user = this.store.currentAccount;
+    //this.user = this.store.currentAccount;
   }
 
   logout(): void {

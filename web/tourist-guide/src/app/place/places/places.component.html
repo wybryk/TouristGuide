@@ -47,9 +47,9 @@
           <div class="place-edit place-event" *ngIf="userPlaces && authService.isUserLoggedIn">
             <i class="fa fa-pencil fa-lg hover-element" aria-hidden="true" (click)="gotoEdit(place.placeId)"></i>
           </div>
-          <div class="place-delete place-event" *ngIf="userPlaces && authService.isUserLoggedIn">
+          <!--<div class="place-delete place-event" *ngIf="userPlaces && authService.isUserLoggedIn">
             <i class="fa fa-trash-o fa-lg hover-element" aria-hidden="true" (click)="deletePlace(place.placeId)"></i>
-          </div>
+          </div>-->
         </div>
       </div>
     </mat-list-item>

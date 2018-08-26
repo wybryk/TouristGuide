@@ -34,7 +34,7 @@
     <p-pickList [source]="filterPlaces" [target]="route.places" sourceHeader="Dostępne miejsca" targetHeader="Wybrane miejsca"
                 [responsive]="true" filterBy="name" dragdrop="true" dragdropScope="filterPlaces"
                 sourceFilterPlaceholder="Nazwa" [showSourceFilter]="true" [showTargetFilter]="false"
-                [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}">
+                [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'350px'}">
       <ng-template let-place pTemplate="item">
         <div class="ui-helper-clearfix">
           <img src="assets/images/{{place.image}}" style="display:inline-block;margin:2px 0 2px 2px" width="48">
@@ -47,9 +47,8 @@
     </p-pickList>
   </div>
   <div>
-    <button mat-button [disabled]="!route.name"
-            (click)="editRoute()">Dodaj
-    </button>
+    <button mat-button [disabled]="!route.name" (click)="editRoute()">Edytuj</button>
     <button mat-button (click)="clear()">Wyczyść</button>
+    <button mat-button (click)="goBack()">Wróć</button>
   </div>
 </div>

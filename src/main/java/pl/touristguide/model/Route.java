@@ -2,7 +2,7 @@ package pl.touristguide.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.List;
 
 @Entity
 @Table(name = "ROUTE")
@@ -18,7 +18,7 @@ public class Route {
     @Column(name = "ROUTE_LENGTH")
     private BigDecimal routeLength;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "ACCOUNT_ID")
     private Account account;
 

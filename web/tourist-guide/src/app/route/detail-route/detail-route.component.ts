@@ -25,10 +25,6 @@ export class DetailRouteComponent implements OnInit {
       this.routeService.getRoute(+params.get('id'))).subscribe(val => this.route = val);
   }
 
-  gotoEdit() {
-
-  }
-
   goBack() {
     this.location.back();
   }
