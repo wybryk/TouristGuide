@@ -84,7 +84,7 @@ import { MyUserComponent } from './user/my-user/my-user.component';
     ReactiveFormsModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBmWYu91eLP568GTyJdxz3yrM7LdauTS5U'
+      apiKey: 'YOUR_API_KEY'
     }),
     AgmDirectionModule,
     AppRoutingModule,
